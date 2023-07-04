@@ -20,7 +20,7 @@ include(cmake/Compiler.cmake)
 
 target_sources(${PROJECT_NAME}
     PRIVATE
-        "src/main.cpp"
+        "main.cpp"
 
     PUBLIC
         # Public files
