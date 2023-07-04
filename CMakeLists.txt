@@ -21,9 +21,10 @@ include(cmake/Compiler.cmake)
 target_sources(${PROJECT_NAME}
     PRIVATE
         "main.cpp"
+        "src/source.cpp"
 
     PUBLIC
-        # Public files
+        "include/template/header.h"
 )
 
 target_include_directories(${PROJECT_NAME}
