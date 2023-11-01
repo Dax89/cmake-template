@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(projectname
+project(cmake-template
     DESCRIPTION "Project Description"
     LANGUAGES CXX
 )
@@ -34,12 +34,12 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        CLI11::CLI11
-        fmt
-        spdlog
-        scn::scn
         expected
         optional
+        docopt
+        fmt
+        scn::scn
+        spdlog
 )
 
 if(ENABLE_TESTS)
