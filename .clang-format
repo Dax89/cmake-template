@@ -13,6 +13,8 @@ AllowShortBlocksOnASingleLine: Never
 AllowShortIfStatementsOnASingleLine: Never
 AlwaysBreakTemplateDeclarations: Yes
 SpaceBeforeCtorInitializerColon: false
+SpaceBeforeInheritanceColon: false
+SpaceAfterTemplateKeyword: false
 SpaceBeforeParens: Never
 UseTab: Never
 BreakBeforeBraces: Custom

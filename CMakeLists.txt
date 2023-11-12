@@ -1,13 +1,9 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.15...3.23)
 
 project(cmake-template
     DESCRIPTION "Project Description"
     LANGUAGES CXX
 )
-
-option(ENABLE_TESTS "Enable Unit Tests" ON)
-
-set(PROJECT_NAME_TEST "${PROJECT_NAME}_test")
 
 include(cmake/Settings.cmake)
 
@@ -22,9 +18,6 @@ target_sources(${PROJECT_NAME}
     PRIVATE
         "main.cpp"
         "src/source.cpp"
-
-    PUBLIC
-        "include/template/header.h"
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -36,12 +29,18 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         expected
         optional
-        docopt
+        cl
         fmt
         scn::scn
         spdlog
 )
 
-if(ENABLE_TESTS)
-    include(test/UnitTest.cmake)
+if(NOT PROJECT_IS_TOP_LEVEL)
+    return()
+endif()
+
+include(CTest)
+
+if(BUILD_TESTING)
+    add_subdirectory(test)
 endif()
