@@ -1,6 +1,6 @@
 include(cmake/CPM.cmake)
 
-function(setup_dependencies)
+function(setup_core_dependencies)
     CPMAddPackage("gh:TartanLlama/expected@1.1.0")
     CPMAddPackage("gh:TartanLlama/optional@1.1.0")
     CPMAddPackage("gh:fmtlib/fmt#10.1.1")
@@ -17,4 +17,8 @@ function(setup_dependencies)
     if(BUILD_TESTING)
         CPMAddPackage("gh:catchorg/Catch2@3.4.0")
     endif()
+endfunction()
+
+function(setup_dependencies)
+
 endfunction()

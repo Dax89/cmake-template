@@ -1,3 +1,4 @@
+#include "error.h"
 #include <cl/cl.h>
 #include <template/header.h>
 
