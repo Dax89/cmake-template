@@ -6,10 +6,7 @@ project(cmake-template
 )
 
 include(cmake/Settings.cmake)
-
 include(cmake/Dependencies.cmake)
-setup_core_dependencies()
-setup_dependencies()
 
 add_executable(${PROJECT_NAME})
 
