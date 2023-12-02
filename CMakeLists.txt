@@ -1,15 +1,14 @@
-cmake_minimum_required(VERSION 3.15...3.23)
+cmake_minimum_required(VERSION 3.25)
 
 project(cmake-template
     DESCRIPTION "Project Description"
     LANGUAGES CXX
 )
 
-include(cmake/Settings.cmake)
 include(cmake/Dependencies.cmake)
+setup_dependencies()
 
 add_executable(${PROJECT_NAME})
-
 include(cmake/Compiler.cmake)
 
 target_sources(${PROJECT_NAME}
@@ -20,7 +19,7 @@ target_sources(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        "${PROJECT_SOURCE_DIR}/include"
 )
 
 target_link_libraries(${PROJECT_NAME}

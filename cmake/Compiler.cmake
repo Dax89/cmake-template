@@ -1,15 +1,67 @@
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    include(cmake/compiler/GNU.cmake)
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+        EXPORT_COMPILE_COMMANDS ON
+        CXX_STANDARD_REQUIRED YES
+        CXX_EXTENSIONS NO
+        CXX_STANDARD 17
+)
 
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        include(cmake/sanitizer/GNU.cmake)
-    endif()
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    include(cmake/compiler/MSVC.cmake)
+target_compile_features(${PROJECT_NAME}
+    PRIVATE
+        cxx_std_17
+)
 
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        include(cmake/sanitizer/MSVC.cmake)
-    endif()
-else()
-    message(FATAL_ERROR "Unsupported compiler flags: '${CMAKE_CXX_COMPILER_ID}'")
+set(NOT_MSVC_COMPILE_OPTIONS
+    "-Wall"
+    "-Wextra"
+    "-Wpedantic"
+    "-Werror"
+    "-Wno-error=unused"
+    "-Wno-error=unused-function"
+    "-Wno-error=unused-parameter"
+    "-Wno-error=unused-value"
+    "-Wno-error=unused-variable"
+    "-Wno-error=unused-local-typedefs"
+    "-Wno-error=unused-but-set-parameter"
+    "-Wno-error=unused-but-set-variable"
+    "-fno-rtti"
+)
+
+set(NOT_MSVC_LINK_OPTIONS)
+
+set(MSVC_COMPILE_OPTIONS
+    "/W4"
+    "/WX"
+)
+
+set(MSVC_LINK_OPTIONS)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    list(APPEND NOT_MSVC_COMPILE_OPTIONS 
+        "-g"
+        "-fsanitize=address,undefined"
+        "-fno-omit-frame-pointer"
+    )
+
+    list(APPEND NOT_MSVC_LINK_OPTIONS
+        "-fsanitize=address,undefined"
+        "-fno-omit-frame-pointer"
+    )
+
+    list(APPEND MSVC_COMPILE_OPTIONS
+        "/Od"
+        "/fsanitize=address"
+    )
 endif()
+
+target_compile_options(${PROJECT_NAME}
+    PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:${MSVC_COMPILE_OPTIONS}>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${NOT_MSVC_COMPILE_OPTIONS}>
+)
+
+target_link_options(${PROJECT_NAME}
+    PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:${MSVC_LINK_OPTIONS}>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${NOT_MSVC_LINK_OPTIONS}>
+)
