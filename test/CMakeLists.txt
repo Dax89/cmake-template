@@ -1,7 +1,6 @@
-cmake_minimum_required(VERSION 3.15...3.23)
+cmake_minimum_required(VERSION 3.25)
 
 set(PARENT_TARGET "${PROJECT_NAME}")
-
 project(CmakeConfigPackageTests LANGUAGES CXX)
 
 if(PROJECT_IS_TOP_LEVEL)
