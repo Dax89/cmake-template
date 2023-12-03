@@ -61,7 +61,7 @@ target_compile_options(${PROJECT_NAME}
 )
 
 target_link_options(${PROJECT_NAME}
-    PRIVATE
+    PUBLIC
         $<$<CXX_COMPILER_ID:MSVC>:${MSVC_LINK_OPTIONS}>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${NOT_MSVC_LINK_OPTIONS}>
 )
