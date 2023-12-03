@@ -15,7 +15,6 @@ set(NOT_MSVC_COMPILE_OPTIONS
     "-Wall"
     "-Wextra"
     "-Wpedantic"
-    "-Werror"
     "-Wno-error=unused"
     "-Wno-error=unused-function"
     "-Wno-error=unused-parameter"
@@ -31,13 +30,13 @@ set(NOT_MSVC_LINK_OPTIONS)
 
 set(MSVC_COMPILE_OPTIONS
     "/W4"
-    "/WX"
 )
 
 set(MSVC_LINK_OPTIONS)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     list(APPEND NOT_MSVC_COMPILE_OPTIONS 
+        "-Werror"
         "-g"
         "-fsanitize=address,undefined"
         "-fno-omit-frame-pointer"
@@ -49,6 +48,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     )
 
     list(APPEND MSVC_COMPILE_OPTIONS
+        "/WX"
         "/Od"
         "/fsanitize=address"
     )
