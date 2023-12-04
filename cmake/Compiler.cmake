@@ -56,7 +56,6 @@ target_compile_options(${PROJECT_NAME}
 
 target_link_options(${PROJECT_NAME}
     PUBLIC
-        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${NOT_MSVC_LINK_OPTIONS}>
         $<$<AND:$<NOT:$<CXX_COMPILER_ID:MSVC>>,$<CONFIG:Debug>>:${NOT_MSVC_LINK_OPTIONS_DEBUG}>
 )
 
