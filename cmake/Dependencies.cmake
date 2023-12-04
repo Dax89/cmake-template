@@ -1,5 +1,7 @@
 include(cmake/CPM.cmake)
 
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+
 function(setup_dependencies)
     CPMAddPackage("gh:TartanLlama/expected@1.1.0")
     CPMAddPackage("gh:TartanLlama/optional@1.1.0")
