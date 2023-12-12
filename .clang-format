@@ -3,7 +3,7 @@ BasedOnStyle: LLVM
 AccessModifierOffset: -4
 ColumnLimit: 80
 IndentWidth: 4
-IndentPPDirectives: BeforeHash
+IndentPPDirectives: None
 IndentCaseLabels: true
 PointerAlignment: Left
 AllowShortEnumsOnASingleLine: true
