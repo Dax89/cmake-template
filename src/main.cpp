@@ -1,6 +1,16 @@
 #include <cl/cl.h>
 #include <cmake-template/header.h>
 
+#if !defined(NDEBUG)
+extern "C" const char* __asan_default_options() { // NOLINT
+    return "suppressions=asan.supp:print_suppressions=0";
+}
+
+extern "C" const char* __lsan_default_options() { // NOLINT
+    return "suppressions=lsan.supp:print_suppressions=0";
+}
+#endif
+
 int main(int argc, char** argv) {
     using namespace cl::string_literals;
 
