@@ -37,6 +37,7 @@ include(cmake/Compiler.cmake)
 setup_compiler(${PROJECT_NAME_LIB})
 
 if(EXISTS src/main.cpp)
+    add_library(${PROJECT_NAME}::lib ALIAS ${PROJECT_NAME_LIB})
     add_executable(${PROJECT_NAME})
 
     target_sources(${PROJECT_NAME}
@@ -44,7 +45,6 @@ if(EXISTS src/main.cpp)
             src/main.cpp
     )
 
-    add_library(${PROJECT_NAME}::lib ALIAS ${PROJECT_NAME_LIB})
     target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}::lib)
     setup_compiler(${PROJECT_NAME})
 endif()
