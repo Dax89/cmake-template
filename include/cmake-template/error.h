@@ -3,23 +3,23 @@
 #include <spdlog/spdlog.h>
 
 #if defined(__GNUC__) // GCC, Clang, ICC
-    #include <array>
-    #include <cxxabi.h>
-    #include <execinfo.h>
-    #include <string_view>
-    #include <unistd.h>
+#include <array>
+#include <cxxabi.h>
+#include <execinfo.h>
+#include <string_view>
+#include <unistd.h>
 
-    #define intrinsic_trap() __builtin_trap()
-    #define intrinsic_unreachable() __builtin_unreachable()
-    #define intrinsic_unlikely(x) __builtin_expect(!!(x), 0)
+#define intrinsic_trap() __builtin_trap()
+#define intrinsic_unreachable() __builtin_unreachable()
+#define intrinsic_unlikely(x) __builtin_expect(!!(x), 0)
 #elif defined(_MSC_VER) // MSVC
-    #define intrinsic_trap() __debugbreak()
-    #define intrinsic_unreachable() __assume(false)
-    #define intrinsic_unlikely(x) (!!(x))
+#define intrinsic_trap() __debugbreak()
+#define intrinsic_unreachable() __assume(false)
+#define intrinsic_unlikely(x) (!!(x))
 #else
-    #define intrinsic_trap() std::abort()
-    #define intrinsic_unreachable() std::abort()
-    #define intrinsic_unlikely(x) (!!(x))
+#define intrinsic_trap() std::abort()
+#define intrinsic_unreachable() std::abort()
+#define intrinsic_unlikely(x) (!!(x))
 #endif
 
 namespace impl {
@@ -73,7 +73,7 @@ inline void print_backtrace() {
 
     for(int i = 0; i < size; i++) {
         fmt::print("#{} ", i);
-        impl::print_backtrace(symbols[i]);
+        ::impl::print_backtrace(symbols[i]);
     }
 
     std::free(symbols);
@@ -87,47 +87,47 @@ inline void print_backtrace() {}
 #endif
 
 [[noreturn]] inline void trap() {
-    impl::print_backtrace();
+    ::impl::print_backtrace();
     std::fflush(nullptr);
     intrinsic_trap();
 }
 
 [[noreturn]] inline void abort() {
-    impl::print_backtrace();
+    ::impl::print_backtrace();
     std::fflush(nullptr);
     std::abort();
 }
 
 [[noreturn]] inline void unreachable() {
 #if defined(NDEBUG) // Release
-    impl::print_backtrace();
+    ::impl::print_backtrace();
     std::fflush(nullptr);
     intrinsic_unreachable();
 #else
-    impl::trap();
+    ::impl::trap();
 #endif
 }
 
 } // namespace impl
 
-#define print_backtrace core::impl::print_backtrace();
+#define print_backtrace ::impl::print_backtrace();
 
 #define assume(...)                                                            \
     do {                                                                       \
         if(intrinsic_unlikely(!(__VA_ARGS__))) {                               \
             SPDLOG_CRITICAL("Assume condition failed: '{}'", #__VA_ARGS__);    \
-            impl::trap();                                                      \
+            ::impl::trap();                                                    \
         }                                                                      \
     } while(false)
 
 #define unreachable                                                            \
     do {                                                                       \
         SPDLOG_CRITICAL("Unreachable code detected");                          \
-        impl::unreachable();                                                   \
+        ::impl::unreachable();                                                 \
     } while(false)
 
 #define except(...)                                                            \
     do {                                                                       \
         SPDLOG_CRITICAL(__VA_ARGS__);                                          \
-        impl::abort();                                                         \
+        ::impl::abort();                                                       \
     } while(false)

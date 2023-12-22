@@ -1,0 +1,4 @@
+leak:libglib-2.0
+leak:libaseCnsP11.so
+leak:libASEP11.so
+leak:libgnutls.so

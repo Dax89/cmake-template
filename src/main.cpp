@@ -1,6 +1,5 @@
-#include "error.h"
 #include <cl/cl.h>
-#include <template/header.h>
+#include <cmake-template/header.h>
 
 int main(int argc, char** argv) {
     using namespace cl::string_literals;
@@ -22,6 +21,6 @@ int main(int argc, char** argv) {
 
     cl::Args args = cl::parse(argc, argv);
 
-    print_hello();
+    cmake_template::print_hello();
     return 0;
 }

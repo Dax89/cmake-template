@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
-set(PARENT_TARGET "${PROJECT_NAME}")
-get_target_property(PARENT_TARGET_TYPE ${PARENT_TARGET} TYPE)
+set(PARENT_TARGET "${PROJECT_NAME_LIB}")
 
 project(CmakeConfigPackageTests LANGUAGES CXX)
 
@@ -15,18 +14,19 @@ if(PROJECT_IS_TOP_LEVEL)
     endif()
 endif()
 
-include(${Catch2_SOURCE_DIR}/contrib/Catch.cmake)
+include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 add_executable(tests)
+setup_compiler(tests)
 
-target_sources(tests
+target_sources(tests 
     PRIVATE
-        "main.cpp"
+        main.cpp
 )
 
 target_link_libraries(tests
     PRIVATE
         Catch2::Catch2
-        $<$<NOT:$<STREQUAL:${PARENT_TARGET_TYPE},EXECUTABLE>>:${PARENT_TARGET}>
+        ${PARENT_TARGET}
 )
 
 catch_discover_tests(tests

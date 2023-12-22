@@ -1,4 +1,9 @@
+#include <cmake-template/header.h>
 #include <fmt/core.h>
-#include <template/header.h>
 
-void print_hello() { fmt::print("Hello World\n"); }
+namespace cmake_template {
+
+int sum(int a, int b) { return a + b; }
+void print_hello() { fmt::print("CMake Template: Hello World\n"); }
+
+} // namespace cmake_template
