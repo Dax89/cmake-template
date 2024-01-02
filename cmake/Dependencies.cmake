@@ -1,10 +1,14 @@
 include(cmake/CPM.cmake)
 
+if(PROJECT_IS_TOP_LEVEL)
+    include(CTest)
+endif()
+
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 function(setup_dependencies)
     # Priority over old Catch2's versions from dependencies
-    if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
+    if(BUILD_TESTING)
         CPMAddPackage("gh:catchorg/Catch2@3.5.0")
     endif()
 

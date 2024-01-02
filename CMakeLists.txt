@@ -66,8 +66,6 @@ if(CMAKE_BUILD_TYPE MATCHES "Debug")
     )
 endif()
 
-include(CTest)
-
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
