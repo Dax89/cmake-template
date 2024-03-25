@@ -18,6 +18,13 @@ function(setup_dependencies)
     CPMAddPackage("gh:eliaskosunen/scnlib@1.1.3")
     CPMAddPackage("gh:Dax89/cl@1.0.1")
 
+    CPMAddPackage(
+        NAME boost_regex
+        GIT_TAG "boost-1.84.0"
+        GITHUB_REPOSITORY "boostorg/regex"
+        OPTIONS "BOOST_REGEX_STANDALONE ON"
+    )
+
     CPMAddPackage(spdlog
         NAME spdlog
         VERSION "1.12.0"

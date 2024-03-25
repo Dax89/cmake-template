@@ -25,12 +25,13 @@ target_include_directories(${PROJECT_NAME_LIB}
 
 target_link_libraries(${PROJECT_NAME_LIB}
     PUBLIC
-        expected
-        optional
-        cl
-        fmt
+        tl::expected
+        tl::optional
+        fmt::fmt
         scn::scn
-        spdlog
+        spdlog::spdlog
+        Boost::regex
+        cl
 )
 
 include(cmake/Compiler.cmake)
