@@ -1,7 +1,12 @@
 #include <cl/cl.h>
 #include <cmake-template/header.h>
 
-#if !defined(NDEBUG)
+#if !defined(__has_feature)
+#define __has_feature(x) 0
+#endif
+
+#if __has_feature(address_sanitizer) || defined(__SANITIZE_ADDRESS__)
+
 extern "C" const char* __asan_default_options() { // NOLINT
     return "suppressions=asan.supp:print_suppressions=0";
 }
@@ -9,9 +14,11 @@ extern "C" const char* __asan_default_options() { // NOLINT
 extern "C" const char* __lsan_default_options() { // NOLINT
     return "suppressions=lsan.supp:print_suppressions=0";
 }
+
 extern "C" const char* __lsan_default_suppressions() { // NOLINT
     return "";
 }
+
 #endif
 
 int main(int argc, char** argv) {
