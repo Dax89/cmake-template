@@ -16,6 +16,7 @@ function(setup_compiler project_name)
         "-Wall"
         "-Wextra"
         "-Wpedantic"
+        "-Wno-missing-field-initializers"
         "-Wno-error=unused"
         "-Wno-error=unused-function"
         "-Wno-error=unused-parameter"

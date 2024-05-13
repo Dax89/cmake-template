@@ -21,6 +21,7 @@ Checks: >
   -misc-non-private-member-variables-in-classes,
   -misc-no-recursion,
   -modernize-use-trailing-return-type,
+  -modernize-avoid-c-arrays,
   -readability-named-parameter,
   -readability-braces-around-statements,
   -readability-convert-member-functions-to-static,
