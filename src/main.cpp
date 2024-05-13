@@ -9,6 +9,9 @@ extern "C" const char* __asan_default_options() { // NOLINT
 extern "C" const char* __lsan_default_options() { // NOLINT
     return "suppressions=lsan.supp:print_suppressions=0";
 }
+extern "C" const char* __lsan_default_suppressions() { // NOLINT
+    return "";
+}
 #endif
 
 int main(int argc, char** argv) {

@@ -31,6 +31,7 @@ target_link_libraries(${PROJECT_NAME_LIB}
         scn::scn
         spdlog::spdlog
         Boost::regex
+        rapidjson
         cl
 )
 
