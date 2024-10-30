@@ -29,7 +29,7 @@ target_link_libraries(${PROJECT_NAME_LIB}
         tl::optional
         fmt::fmt
         scn::scn
-        spdlog::spdlog
+        spdlog::spdlog_header_only
         Boost::regex
         rapidjson
         cl
