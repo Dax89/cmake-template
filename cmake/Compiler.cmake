@@ -8,7 +8,7 @@ function(setup_compiler project_name)
     )
 
     target_compile_features(${project_name}
-        PUBLIC
+        PRIVATE
             cxx_std_17
     )
 
